@@ -42,6 +42,7 @@ extern struct Value *stmt_LET(struct Value *value);
 extern struct Value *stmt_LINEINPUT(struct Value *value);
 extern struct Value *stmt_LIST_LLIST(struct Value *value);
 extern struct Value *stmt_LOAD(struct Value *value);
+extern struct Value *stmt_MERGE(struct Value *value);
 extern struct Value *stmt_LOCAL(struct Value *value);
 extern struct Value *stmt_LOCATE(struct Value *value);
 extern struct Value *stmt_LOCK_UNLOCK(struct Value *value);

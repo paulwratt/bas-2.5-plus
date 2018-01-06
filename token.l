@@ -676,6 +676,13 @@ end[ \t]+function	{
                           }
                           return T_LOAD;
                         }
+"merge"                 {
+                          if (cur)
+                          {
+                            cur->statement=stmt_MERGE;
+                          }
+                          return T_MERGE;
+                        }
 "local"			{
                           if (cur)
                           {
@@ -1426,6 +1433,7 @@ void Token_destroy(struct Token *token) /*{{{*/
       case T_MATREAD:           break;
       case T_MATREDIM:          break;
       case T_MATWRITE:          break;
+      case T_MERGE:             break;
       case T_MINUS:             break;
       case T_MKDIR:             break;
       case T_MOD:               break;
@@ -1622,6 +1630,7 @@ struct String *Token_toString(struct Token *token, struct Token *spaceto, struct
     /* T_MATREAD            */ {"mat read",1},
     /* T_MATREDIM           */ {"mat redim",1},
     /* T_MATWRITE           */ {"mat write",1},
+    /* T_MERGE              */ {"merge",1},
     /* T_MINUS              */ {"-",0},
     /* T_MKDIR              */ {"mkdir",1},
     /* T_MOD                */ {"mod",0},

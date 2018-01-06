@@ -33,14 +33,18 @@ int main(int argc, char *argv[]) /*{{{*/
   char *runFile=(char*)0;
   int usage=0,o;
   const char *lp="/dev/null";
+  int autoexec=0;
+  int print_end=1;
   int backslash_colon=0;
   int uppercase=0;
   int restricted=0;
   int lpfd;
   static struct option lopts[]=
   {
+    { "autoexec", no_argument, 0, 'a' },
     { "lp", required_argument, 0, 'l' },
     { "help", no_argument, 0, 'h' },
+    { "no-end-program", no_argument, 0, 'n' },
     { "restricted", no_argument, 0, 'r' },
     { "uppercase", no_argument, 0, 'u' },
     { "backslash-colon", no_argument, 0, 'b' },
@@ -60,10 +64,12 @@ int main(int argc, char *argv[]) /*{{{*/
   textdomain("bas");
 #endif
   /* parse arguments */ /*{{{*/
-  while ((o=getopt_long(argc,argv,"+bl:ruVh?",lopts,(int*)0))!=EOF) switch (o)
+  while ((o=getopt_long(argc,argv,"+abl:nruVh?",lopts,(int*)0))!=EOF) switch (o)
   {
+    case 'a': autoexec=1; break;
     case 'b': backslash_colon=1; break;
     case 'l': lp=optarg; break;
+    case 'n': print_end=0; break;
     case 'u': uppercase=1; break;
     case 'r': restricted=1; break;
     case 'V': printf("bas " VERSION "\n"); exit(0); break;
@@ -73,8 +79,9 @@ int main(int argc, char *argv[]) /*{{{*/
   if (optind<argc) runFile=argv[optind++];
   if (usage==1)
   {
-    fputs(_("Usage: bas [-b] [-l file] [-r] [-u] [program [argument ...]]\n"),stderr);
+    fputs(_("Usage: bas [-a] [-b] [-l file] [-n] [-r] [-u] [program [argument ...]]\n"),stderr);
     fputs(_("       bas [--backslash-colon] [--lp file] [--restricted] [--uppercase] [program [argument ...]]\n"),stderr);
+    fputs(_("       bas [--autoexec] [--no-end-program] [program [argument ...]]\n"),stderr);
     fputs(_("       bas -h|--help\n"),stderr);
     fputs(_("       bas --version\n"),stderr);
     fputs(  "\n",stderr);
@@ -83,15 +90,18 @@ int main(int argc, char *argv[]) /*{{{*/
   }
   if (usage==2)
   {
-    fputs(_("Usage: bas [-b] [-l file] [-u] [program [argument ...]]\n"),stdout);
+    fputs(_("Usage: bas [-a] [-b] [-l file] [-n] [-r] [-u] [program [argument ...]]\n"),stdout);
     fputs(_("       bas [--backslash-colon] [--lp file] [--restricted] [--uppercase] [program [argument ...]]\n"),stdout);
+    fputs(_("       bas [--autoexec] [--no-end-program] [program [argument ...]]\n"),stderr);
     fputs(_("       bas -h|--help\n"),stdout);
     fputs(_("       bas --version\n"),stdout);
     fputs("\n",stdout);
     fputs(_("BASIC interpreter.\n"),stdout);
     fputs("\n",stdout);
+    fputs(_("-a, --autoexec         run './autoexec.bas' first\n"),stdout);
     fputs(_("-b, --backslash-colon  convert backslashs to colons\n"),stdout);
     fputs(_("-l, --lp               write LPRINT output to file\n"),stdout);
+    fputs(_("-n, --no-end-program   dont print 'END program' in direct mode\n"),stdout);
     fputs(_("-r, --restricted       forbid SHELL\n"),stdout);
     fputs(_("-u, --uppercase        output all tokens in uppercase\n"),stdout);
     fputs(_("-h, --help             display this help and exit\n"),stdout);
@@ -109,7 +119,8 @@ int main(int argc, char *argv[]) /*{{{*/
   bas_argv=&argv[optind];
   bas_argv0=runFile;
   /*}}}*/
-  bas_init(backslash_colon,restricted,uppercase,lpfd);
+  bas_init(backslash_colon,restricted,uppercase,print_end,lpfd);
+  if (autoexec) bas_runFile(autoBas);
   if (runFile) bas_runFile(runFile);
   else bas_interpreter();
   bas_exit();

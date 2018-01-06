@@ -1,3 +1,11 @@
+Changes compared to version 2.4
+
+o  MERGE "file.bas" current with listing (direct mode only). Unlike LOAD 
+   it does not perform a NEW internally.
+o  -a in the directory Bas ia run from, first execute "./autoexec.bas"
+o  -n prevent "END program" from being printed
+
+
 Changes compared to version 2.3
 
 o  Matrix inversion on integer arrays with option base 1 fixed
@@ -13,3 +21,4 @@ o  -r for restricted operation
 o  MAT INPUT does not drop excess arguments, but uses them for the
    next row
 o  License changed to MIT
+

@@ -6,17 +6,21 @@ bas \- BASIC interpreter
 .SH SYNOPSIS \"{{{
 .ad l
 .B bas
+.RB [ \-a ]
 .RB [ \-b ]
 .RB [ \-l
 .IR file ]
+.RB [ \-n ]
 .RB [ \-r ]
 .RB [ \-u ]
 .RI [ "program " [ argument "...]]"
 .br
 .B bas
+.RB [ \-\-autoexec ]
 .RB [ \-\-backslash\-colon ]
 .RB [ \-\-lp
 .IR file ]
+.RB [ \-\-no\-end\-program ]
 .RB [ \-\-restricted ]
 .RB [ \-\-uppercase ]
 .RI [ "program " [ argument "...]]"
@@ -38,7 +42,7 @@ Non-numbered lines are executed immediatly (direct mode), numbered
 lines are stored in ascending order.  The line number must be a positive
 integer.  All statements are compiled before the program is run, which
 catches syntactic and other errors.  Keywords and variable names are
-not case sensitive.
+not case sensitive. VAR is different from VAR$.
 .PP
 If a program with unnumbered lines is loaded, storing or deleting
 numbered lines in direct mode is not possible.  You must use \fBrenum\fP
@@ -437,6 +441,10 @@ to standard output if no channel is given.  Different values are
 separated by commas and a newline is written at the end of a line.
 Strings will be written enclosed in double quotes and positive numbers
 are not written with a heading blank.
+.\"}}}
+.IP "\fBmerge\fP [\fIfile$\fP]" \"{{{
+Merge program \fIfile$\fP with current listing (direct mode only). Unlike LOAD
+it does not perform a NEW internally.
 .\"}}}
 .IP "\fBmid$(\fP\fIlvalue$\fP\fB,\fP\fIposition%\fP[\fB,\fP\fIlength%\fP]\fB)=\fP\fIvalue$\fP" \"{{{
 Replace the characters starting at the given \fIposition%\fP inside
@@ -1139,6 +1147,9 @@ anywhere else, hexadecimal values are specified by a leading \fB&h\fP.
 .\"}}}
 .\"}}}
 .SH OPTIONS \"{{{
+.IP "\fB\-a\fP, \fB\-\-autoexec\fP"
+From the folder \fBBas\Fp is started from, first perform \fBRUN "./autoexec.bas"\fP
+in the current directory.
 .IP "\fB\-b\fP, \fB\-\-backslash\-colon\fP"
 Convert backslashs to colons.  By default, a backslash is the operator
 for integer division, but in some BASIC dialects it forms compound
@@ -1146,6 +1157,8 @@ statements as the colon does.
 .IP "\fB\-l\fP \fIfile\fP, \fB\-\-lp\fP \fIfile\fP"
 Write \fBLLIST\fP and \fBLPRINT\fP output to \fIfile\fP.  By default,
 that output will be written to \fB/dev/null\fP.
+.IP "\fB\-n\fP, \fB\-\-no\-end\-program\fP"
+Prevents \fBEND program\fP from being printed
 .IP "\fB\-r\fP, \fB\-\-restricted\fP"
 Restricted operation which does not allow to fork a shell.
 .IP "\fB\-u\fP, \fB\-\-uppercase\fP"
@@ -1160,6 +1173,9 @@ Display version information and exit.
 .SH AUTHOR \"{{{
 This program is copyright 1999\(en2014 Michael Haardt
 <michael@moria.de>.
+.PP
+Custom MAN pages & MSX-BASIC extensions copyright 2017 Paul Wratt
+<paul.wratt@gmail.com>
 .PP
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -1182,7 +1198,8 @@ THE SOFTWARE.
 .SH HISTORY \"{{{
 There has been a \fIbas\fP(1) command in UNIX v7, but its syntax
 was strongly influenced by C, unlike common classic BASIC dialects, and
-thus not compatible with this implementation.
+thus not compatible with this implementation. MSX-BASIC is an extension
+of Microsoft BASIC v4.0.
 .\"}}}
 .SH "SEE ALSO" \"{{{
 The Usenet group comp.lang.basic.misc discusses the classic BASIC dialect.

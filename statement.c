@@ -1077,6 +1077,16 @@ struct Value *stmt_FIELD(struct Value *value) /*{{{*/
   return (struct Value*)0;
 }
 /*}}}*/
+
+/* TODO: add 'FILES', 'FILES ,L', 'FILES "*.*"', 'FILES "*.*",L' */
+/*
+struct Value *stmt_FILES(struct Value *value) /*{{{* /
+{
+
+}
+/*}}}* /
+*/
+
 struct Value *stmt_FOR(struct Value *value) /*{{{*/
 {
   struct Pc forpc=pc;
@@ -1313,6 +1323,8 @@ struct Value *stmt_GOSUB(struct Value *value) /*{{{*/
     struct Token *gosubpc=pc.token;
 
     ++pc.token;
+/* TODO: add expression eval(T_INTEGER) here */
+/* SEE: get && INTERPRET above */
     if (pc.token->type!=T_INTEGER) return Value_new_ERROR(value,MISSINGLINENUMBER);
     if (Program_goLine(&program,pc.token->u.integer,&gosubpc->u.gosubpc)==(struct Pc*)0) return Value_new_ERROR(value,NOSUCHLINE);
     if (pass==COMPILE && Program_scopeCheck(&program,&gosubpc->u.gosubpc,findLabel(L_FUNC))) return Value_new_ERROR(value,OUTOFSCOPE);
@@ -1339,6 +1351,8 @@ struct Value *stmt_RESUME_GOTO(struct Value *value) /*{{{*/
     struct Token *gotopc=pc.token;
 
     ++pc.token;
+/* TODO: add expression eval(T_INTEGER) here */
+/* SEE: get && INTERPRET above */
     if (pc.token->type!=T_INTEGER) return Value_new_ERROR(value,MISSINGLINENUMBER);
     if (Program_goLine(&program,pc.token->u.integer,&gotopc->u.gotopc)==(struct Pc*)0) return Value_new_ERROR(value,NOSUCHLINE);
     if (pass==COMPILE && Program_scopeCheck(&program,&gotopc->u.gotopc,findLabel(L_FUNC))) return Value_new_ERROR(value,OUTOFSCOPE);
@@ -1506,6 +1520,42 @@ struct Value *stmt_LOAD(struct Value *value) /*{{{*/
     }
     FS_close(dev);
     program.unsaved=0;
+  }
+  else Value_destroy(value);
+  return (struct Value*)0;
+}
+/*}}}*/
+struct Value *stmt_MERGE(struct Value *value) /*{{{*/
+{
+  struct Pc loadpc;
+
+  if (pass==INTERPRET && !DIRECTMODE) return Value_new_ERROR(value,NOTINPROGRAMMODE);
+  ++pc.token;
+  loadpc=pc;
+  if (eval(value,_("file name"))->type==V_ERROR || Value_retype(value,V_STRING)->type==V_ERROR)
+  {
+    pc=loadpc;
+    return value;
+  }
+  if (pass==INTERPRET)
+  {
+    int dev;
+
+    if ((dev=FS_openin(value->u.string.character))==-1)
+    {
+      pc=loadpc;
+      Value_destroy(value);
+      return Value_new_ERROR(value,IOERROR,FS_errmsg);
+    }
+    FS_width(dev,0);
+    Value_destroy(value);
+    if (Program_merge(&program,dev,value))
+    {
+      pc=loadpc;
+      return value;
+    }
+    FS_close(dev);
+    program.unsaved=1;
   }
   else Value_destroy(value);
   return (struct Value*)0;

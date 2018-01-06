@@ -81,11 +81,13 @@ static struct Auto stack;
 static struct Program program;
 static struct Global globals;
 static int run_restricted;
+static int do_print_end;
 
 int bas_argc;
 char *bas_argv0;
 char **bas_argv;
 int bas_end;
+const char *autoBas="./autoexec.bas";
 /*}}}*/
 /* forward prototypes */ /*{{{*/
 static struct Value *statements(struct Value *value);
@@ -1568,7 +1570,7 @@ static struct Value *statements(struct Value *value) /*{{{*/
 }
 /*}}}*/
 
-void bas_init(int backslash_colon, int restricted, int uppercase, int lpfd) /*{{{*/
+void bas_init(int backslash_colon, int restricted, int uppercase, int print_end, int lpfd) /*{{{*/
 {
 #ifdef HAVE_GETTEXT
   bindtextdomain("bas",LOCALEDIR);
@@ -1582,6 +1584,7 @@ void bas_init(int backslash_colon, int restricted, int uppercase, int lpfd) /*{{
   FS_opendev(STDCHANNEL,0,1);
   FS_opendev(LPCHANNEL,-1,lpfd);
   run_restricted=restricted;
+  do_print_end=print_end;
 }
 /*}}}*/
 void bas_runFile(const char *runFile) /*{{{*/
@@ -1592,6 +1595,8 @@ void bas_runFile(const char *runFile) /*{{{*/
   new();
   if ((dev=FS_openin(runFile))==-1)
   {
+    if (strcmp(runFile,autoBas)==0) return;
+
     const char *errmsg=FS_errmsg;
 
     FS_putChars(0,_("bas: Executing `"));
@@ -1708,7 +1713,7 @@ void bas_interpreter(void) /*{{{*/
         Token_destroy(line);
         if (FS_istty(STDCHANNEL) && bas_end>0)
         {
-          FS_putChars(STDCHANNEL,_("END program\n"));
+          if (do_print_end) FS_putChars(STDCHANNEL,_("END program\n"));
           bas_end=0;
         }
       }

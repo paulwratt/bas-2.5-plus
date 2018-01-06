@@ -567,6 +567,16 @@ static struct Value *fn_environs(struct Value *v, struct Auto *stack) /*{{{*/
   return v;
 }
 /*}}}*/
+
+/* FIXME: set T_STRING environment variable */
+/*
+static struct Value *fn_environt(struct Value *v, struct Auto *stack) /*{{{* /
+{
+
+}
+/*}}}* /
+*/
+
 static struct Value *fn_eof(struct Value *v, struct Auto *stack) /*{{{*/
 {
   int e=FS_eof(intValue(stack,0));

@@ -8,8 +8,9 @@ extern int bas_argc;
 extern char *bas_argv0;
 extern char **bas_argv;
 extern int bas_end;
+extern const char *autoBas;
 
-extern void bas_init(int backslash_colon, int restricted, int uppercase, int lpfd);
+extern void bas_init(int backslash_colon, int restricted, int uppercase, int print_end, int lpfd);
 extern void bas_runFile(const char *runFile);
 extern void bas_runLine(const char *runLine);
 extern void bas_interpreter(void);

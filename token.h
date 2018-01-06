@@ -186,6 +186,7 @@ enum TokenType
   T_MATREAD,
   T_MATREDIM,
   T_MATWRITE,
+  T_MERGE,
   T_MINUS,
   T_MKDIR,
   T_MOD,
@@ -368,6 +369,7 @@ struct Token
     /* T_MATPRINT           */
     /* T_MATREAD            */
     /* T_MATREDIM           */
+    /* T_MERGE              */
     /* T_MINUS              */
     /* T_MKDIR              */
     /* T_MOD                */
