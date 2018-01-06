@@ -6,6 +6,9 @@ last edited: Jan 6 2018
 
 Here _plus_ means version 2.5 and later (bas-2.* == bas-2.5-plus). **BAS** v2.4 was last updated in 2015, but I have been unable to get are response from Michaels email address, so considering the bug fixes and changes made we continue development here.
 
+# binaries
+All binary objects present in the repo are compiled on a RPi2 with gcc-6.1.0, on a customised (mostly console only) SD card image of PipaOS 5.0 with minimal X-Windows (for Chromium Browser on VT8).
+
 # additions
 Various command line options have been added, including 265 colors (works with **$TERM** _fbterm_ & _xterm-256colors_) and the ability to pre-execute "./autoexec.bas" in the current directory on startup. Almost all extensions to **BAS 2.4** are supplied in **BAS-2.5-pw** (including MSX, Amstrad, etc), unless they are generic then they are also added to  **BAS-2.5** (eg. MERGE, CHAIN). Bug fixes are applied to both **BAS-2.5** and **BAS-2.5-pw**. **BAS-2.5-pw** is 100% backwards compatible with **BAS-2.5**, but also contains additional extension and _BAS_ _manual_ sub-sections:
 
