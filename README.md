@@ -45,9 +45,9 @@ or
 One _bug_ that does exist is that **environ** **entry$** _CANNOT_ set strings, but _CAN_ set integers.
 
 # future
-Because I use **BAS** on a Raspberry Pi, I have plans to include BBC BASIC style _inline_ _assembler_. I also currently have available an "inline z80 core", while also looking at ways to include roms, and exit back to the interpreter. I have already put in place the ability to use the **option** statement to allow upto 64 kilobytes of ram to be allocated, and _thence_ the use of **PEEK** and **POKE** in that range. This will be extended (after some thought) to the use of **INP** and **OUT** to access the RPi GPIO pins.
+Because I use **BAS** on a Raspberry Pi, I have plans to include **BBC** **BASIC** style _inline_ _assembler_. I also currently have available an "inline z80 core", and I am looking at ways to include roms, and exit back to the interpreter. I have already put in place the ability to use the **option** statement to allow upto 64 kilobytes of ram to be allocated, and _thence_ (ie. not yet) the use of **PEEK** and **POKE** in that range. This will be extended (after some thought) to the use of **INP** and **OUT** to access the RPi GPIO pins.
 
-I also have a range of _assistant_ scripts and programs that allowS **BAS** to use other BASIC extensions via the _SHELL_ statement. Some of these are targeted at the **/dev/fb0** (framebuffer) device. At the moment my framebuffer code is highly intelligent about the pixel (color) format, however any use of a library (SDL, SDL2, etc) is being considered only as a fork of **BAS-2.5** or **BAS-2.5-pw**. Direct framebuffer access may be included at a future date.
+I also have a range of _assistant_ scripts and programs that allow **BAS** to use other BASIC extensions via the _SHELL_ statement. Some of these are targeted at the framebuffer device (**/dev/fb0**). At the moment my framebuffer code is highly intelligent about the pixel (color) format, however any use of a library (SDL, SDL2, etc) is being considered only as a fork of **BAS-2.5** or **BAS-2.5-pw**. Direct framebuffer access may be included at a future date.
 
 The command line scripts are available in the project https://github.com/paulwratt/ShellBASIC
 
