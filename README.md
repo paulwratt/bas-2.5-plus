@@ -1,8 +1,8 @@
 # bas-2.5-plus
 2018 version of BAS 2.4 ANSI BASIC interpreter by Michael Haardt - moira.de (cpmtools fame)
 
-This file is supplimentary to the **BAS** project
-edited: Jan 6 2018
+This file is supplimentary to the **BAS** project, 
+last edited: Jan 6 2018
 
 Here _plus_ means version 2.5 and later (bas-2.* == bas-2.5-plus). **BAS** v2.4 was last updated in 2015, but I have been unable to get are response from Michaels email address, so considering the bug fixes and changes made we continue development here.
 
