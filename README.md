@@ -7,12 +7,12 @@ last edited: Jan 6 2018
 Here _plus_ means version 2.5 and later (bas-2.* == bas-2.5-plus). **BAS** v2.4 was last updated in 2015, but I have been unable to get are response from Michaels email address, so considering the bug fixes and changes made we continue development here.
 
 # additions
-Various command line options have been added, including 265 colors (works with **$TERM** _fbterm_ & _xterm-256colors_) and the ability to pre-execute "./autoexec.bas" in the current directory on startup. Almost all extensions to **BAS 2.4** are supplied in **BAS-2.5-pw** (including MSX, Amstrad, etc), unless they are generic then they are also added to  **BAS-2.5**. Bug fixes are applied to both **BAS-2.5** and **BAS-2.5-pw**. **BAS-2.5-pw** is 100% backwards compatible with **BAS-2.5**, but also contains additional _BAS_ _manual_ sub-sections:
+Various command line options have been added, including 265 colors (works with **$TERM** _fbterm_ & _xterm-256colors_) and the ability to pre-execute "./autoexec.bas" in the current directory on startup. Almost all extensions to **BAS 2.4** are supplied in **BAS-2.5-pw** (including MSX, Amstrad, etc), unless they are generic then they are also added to  **BAS-2.5** (eg. MERGE, CHAIN). Bug fixes are applied to both **BAS-2.5** and **BAS-2.5-pw**. **BAS-2.5-pw** is 100% backwards compatible with **BAS-2.5**, but also contains additional extension and _BAS_ _manual_ sub-sections:
 
   * man bas - full manual, updated, as per v2.4
   * man bas_statements - only "statements"
   * man bas_functions - only "functions"
-  * man ba_direct - only "statements" that work in "direct mode"
+  * man bas_direct - "statements" that only work in "direct mode"
   * man bas_files - only file related "statements" and "functions"
   * man bas_matrix - only matrix related "statements" and "functions"
   * man bas_msx_compatability - changes, workarounds and fixes for MSX-BASIC source code.
@@ -41,6 +41,8 @@ This means using one of the following, combined with a function to write the str
 or
 
 > open "file.ext" for binary as #n
+
+One _bug_ that does exist is that **environ** **entry$** _CANNOT_ set strings, but _CAN_ set integers.
 
 # future
 Because I use **BAS** on a Raspberry Pi, I have plans to include BBC BASIC style _inline_ _assembler_. I also currently have available an "inline z80 core", while also looking at ways to include roms, and exit back to the interpreter. I have already put in place the ability to use the **option** statement to allow upto 64 kilobytes of ram to be allocated, and _thence_ the use of **PEEK** and **POKE** in that range. This will be extended (after some thought) to the use of **INP** and **OUT** to access the RPi GPIO pins.
