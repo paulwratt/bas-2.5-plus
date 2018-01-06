@@ -28,7 +28,7 @@ There are a couple of minor quirks, which some people may see as bugs, but the o
 
 This (originally) was intended to allow wordwrap without programatic intervention or logic being required.
 
-According to usage tests, this _also_ applies to file output, not just screen output, and with an un-adjusted "width" you will find that when using standard **print #n,"string";**, the buffer is only output when >= width or 80 charcters. Even a standard **print #n,"string>80"** will also show this _quirk_. Because the strings are longer than >=80 characters an NL/CR is inserted _BEFORE_ the string.
+According to usage tests, this _also_ applies to file output, not just screen output, and with an un-adjusted "width" you will find that when using standard **print #n,"string";**, the buffer is only output when >= width or 80 charcters. **print #n,"string>80"** will also show this _quirk_. Because the strings are longer than >=80 characters an NL/CR is inserted _BEFORE_ the string.
 
 For unknown line lengths, the workaround is to _NOT_ use:
 
