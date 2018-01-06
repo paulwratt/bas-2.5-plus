@@ -8,12 +8,12 @@ Here _plus_ means version 2.5 and later. V2.4 was last updated in 2015, but I ha
 # additions
 Various command line options, including, 265 colors, and the ability to pre-execute "./autoexec.bas" in the current directory on startup. Almost all extensions to **BAS 2.4** are supplied in **BAS-2.5-pw** (including MSX, Amstrad, etc), unless they are generic. Bug fixes are applied to both **BAS-2.5** and **BAS-2.5-pw**. **BAS-2.5-pw** is 100% backwards compatible with **BAS-2.5** but also contains _BAS_ _manual_ subsections:
 
-  * bas man - full manual, updated, as per v2.4
+  * man bas - full manual, updated, as per v2.4
   * man bas_statements - only "statements"
   * man bas_functions - only "functions"
-  * bas_files - only file related "statements" and "functions"
-  * bas_matrix - only matrix related "statements" and "functions"
-  * bas_msx_compatability - changes, workarounds and fixes for MSX-BASIC source code.
+  * man bas_files - only file related "statements" and "functions"
+  * man bas_matrix - only matrix related "statements" and "functions"
+  * man bas_msx_compatability - changes, workarounds and fixes for MSX-BASIC source code.
 
 **BAS** will move to v2.6 when a suitable solutions has been found for the 80 column bug (see below).
 
