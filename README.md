@@ -23,6 +23,8 @@ Various command line options have been added, including 265 colors (works with *
 **BAS-2.5** will move to v2.6 when a suitable solutions has been found for the 80 column bug below.
 
 # bugs
+NOTE: see **width** statement in man page for workarounds
+
 There are a couple of minor quirks, which some people may see as bugs, but the only real "quirk" at the moment is the 80 column print bug. The internal buffer of both files and screen (file #0) is initialized to "width 80". The screen can be updated by importing tyhe **$COLUMNS** environment variable, but this does not affect the width of file output. According to the manual:
 
 > **print** without **using** will advance to the next line if the value of the expression no longer fits into the current line.
